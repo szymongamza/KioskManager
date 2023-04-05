@@ -1,0 +1,105 @@
+﻿@model KioskManager.Models.Kiosk
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Kiosk</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PCId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PCId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ActualIPAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ActualIPAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.isOnline)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.isOnline)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Registered)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Registered)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastOnline)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastOnline)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SettingHostName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SettingHostName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SettingHomePage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SettingHomePage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SettingKioskConfig)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SettingKioskConfig)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SettingScheduledAction)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SettingScheduledAction)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SettingRefreshPage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SettingRefreshPage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SettingRootPassword)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SettingRootPassword)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SettingRtcWake)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SettingRtcWake)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SettingScreenSettings)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SettingScreenSettings)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SettingTimeZone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SettingTimeZone)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

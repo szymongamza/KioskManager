@@ -1,0 +1,113 @@
+﻿@model IEnumerable<KioskManager.Models.Kiosk>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PCId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActualIPAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isOnline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Registered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastOnline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingHostName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingHomePage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingKioskConfig)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingScheduledAction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingRefreshPage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingRootPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingRtcWake)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingScreenSettings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingTimeZone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PCId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualIPAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isOnline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastOnline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingHostName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingHomePage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingKioskConfig)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingScheduledAction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingRefreshPage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingRootPassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingRtcWake)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingScreenSettings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingTimeZone)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

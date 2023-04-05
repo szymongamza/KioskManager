@@ -1,0 +1,98 @@
+﻿@model KioskManager.Models.Kiosk
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Kiosk</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PCId" class="control-label"></label>
+                <input asp-for="PCId" class="form-control" />
+                <span asp-validation-for="PCId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActualIPAddress" class="control-label"></label>
+                <input asp-for="ActualIPAddress" class="form-control" />
+                <span asp-validation-for="ActualIPAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="isOnline" /> @Html.DisplayNameFor(model => model.isOnline)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registered" class="control-label"></label>
+                <input asp-for="Registered" class="form-control" />
+                <span asp-validation-for="Registered" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastOnline" class="control-label"></label>
+                <input asp-for="LastOnline" class="form-control" />
+                <span asp-validation-for="LastOnline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SettingHostName" class="control-label"></label>
+                <input asp-for="SettingHostName" class="form-control" />
+                <span asp-validation-for="SettingHostName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SettingHomePage" class="control-label"></label>
+                <input asp-for="SettingHomePage" class="form-control" />
+                <span asp-validation-for="SettingHomePage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SettingKioskConfig" class="control-label"></label>
+                <input asp-for="SettingKioskConfig" class="form-control" />
+                <span asp-validation-for="SettingKioskConfig" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SettingScheduledAction" class="control-label"></label>
+                <input asp-for="SettingScheduledAction" class="form-control" />
+                <span asp-validation-for="SettingScheduledAction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SettingRefreshPage" class="control-label"></label>
+                <input asp-for="SettingRefreshPage" class="form-control" />
+                <span asp-validation-for="SettingRefreshPage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SettingRootPassword" class="control-label"></label>
+                <input asp-for="SettingRootPassword" class="form-control" />
+                <span asp-validation-for="SettingRootPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SettingRtcWake" class="control-label"></label>
+                <input asp-for="SettingRtcWake" class="form-control" />
+                <span asp-validation-for="SettingRtcWake" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SettingScreenSettings" class="control-label"></label>
+                <input asp-for="SettingScreenSettings" class="form-control" />
+                <span asp-validation-for="SettingScreenSettings" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SettingTimeZone" class="control-label"></label>
+                <input asp-for="SettingTimeZone" class="form-control" />
+                <span asp-validation-for="SettingTimeZone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
