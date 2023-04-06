@@ -6,38 +6,14 @@
 
 <h1>Edit</h1>
 
-<h4>Kiosk</h4>
+<h4>Kiosk @Model.SettingHostName</h4>
+<h5>@Model.PCId</h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="PCId" class="control-label"></label>
-                <input asp-for="PCId" class="form-control" />
-                <span asp-validation-for="PCId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActualIPAddress" class="control-label"></label>
-                <input asp-for="ActualIPAddress" class="form-control" />
-                <span asp-validation-for="ActualIPAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="isOnline" /> @Html.DisplayNameFor(model => model.isOnline)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Registered" class="control-label"></label>
-                <input asp-for="Registered" class="form-control" />
-                <span asp-validation-for="Registered" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastOnline" class="control-label"></label>
-                <input asp-for="LastOnline" class="form-control" />
-                <span asp-validation-for="LastOnline" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="SettingHostName" class="control-label"></label>
                 <input asp-for="SettingHostName" class="form-control" />

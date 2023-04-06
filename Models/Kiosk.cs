@@ -1,23 +1,43 @@
-﻿namespace KioskManager.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KioskManager.Models
 {
     public class Kiosk
     {
         public int Id { get; set; }
+        [Display(Name = "PC Id")]
         public string PCId { get; set; } = string.Empty;
+        [Display(Name = "IP Address")]
         public string? ActualIPAddress { get; set; }
+        [Display(Name = "Status")]
         public bool isOnline { get; set; }
+        [Display(Name = "Registered")]
         public DateTime Registered { get; set; }
+        [Display(Name = "Last Online")]
         public DateTime? LastOnline { get; set; }
 
         //Settings:
+        [Display(Name = "Host Name")]
         public string SettingHostName { get; set; } = string.Empty;
+        [Display(Name = "Home Page")]
+        [DataType(DataType.Url)]
         public string SettingHomePage { get; set; } = string.Empty;
+        [Display(Name = "Config Url")]
+        [DataType(DataType.Url)]
         public string SettingKioskConfig { get; set; } = string.Empty;
+        [Display(Name = "Scheduled Actions")]
         public string SettingScheduledAction { get; set; } = string.Empty;
-        public string SettingRefreshPage { get; set; } = string.Empty;
+        [Display(Name = "Refresh Page Time")]
+        [DataType(DataType.Duration)]
+        public TimeSpan SettingRefreshPage { get; set; }
+        [Display(Name = "Root Password")]
+        [DataType(DataType.Password)]
         public string SettingRootPassword { get; set; } = string.Empty;
+        [Display(Name = "RTC Wake")]
         public string SettingRtcWake { get; set; } = string.Empty;
+        [Display(Name = "Screen Settings")]
         public string SettingScreenSettings { get; set; } = string.Empty;
+        [Display(Name = "Time Zone")]
         public string SettingTimeZone { get; set; } = string.Empty;
         public string GetSettings()
         {

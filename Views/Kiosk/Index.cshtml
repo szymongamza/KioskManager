@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<KioskManager.Models.Kiosk>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Kiosks";
 }
 
-<h1>Index</h1>
+<h1>Kiosks</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -34,25 +31,7 @@
                 @Html.DisplayNameFor(model => model.SettingHomePage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SettingKioskConfig)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SettingScheduledAction)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.SettingRefreshPage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SettingRootPassword)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SettingRtcWake)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SettingScreenSettings)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SettingTimeZone)
             </th>
             <th></th>
         </tr>
@@ -82,29 +61,11 @@
                 @Html.DisplayFor(modelItem => item.SettingHomePage)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SettingKioskConfig)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SettingScheduledAction)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.SettingRefreshPage)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SettingRootPassword)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SettingRtcWake)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SettingScreenSettings)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SettingTimeZone)
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Details" asp-route-id="@item.PCId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
