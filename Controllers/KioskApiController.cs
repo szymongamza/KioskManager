@@ -74,7 +74,7 @@ namespace KioskManager.Controllers
                     SettingHomePage = $"http://192.168.0.226:5000/Kiosk/Details/{kiosk}",
                     SettingKioskConfig = "http://192.168.0.226:5000/KioskApi/register",
                     SettingScheduledAction = "Monday-22:00 Tuesday-22:00 Wednesday-22:00 Thursday-22:00 Friday-22:00 Saturday-22:00 action:halt",
-                    SettingRefreshPage = "10",
+                    SettingRefreshPage = TimeSpan.FromSeconds(10),
                     SettingRootPassword = "password",
                     SettingRtcWake = "Monday-7:00 Tuesday-7:00 Wednesday-7:00 Thursday-7:00 Friday-7:00 Saturday-7:00",
                     SettingScreenSettings = "DP1:1920x1080:60.00:normal:right:normal DVI-0:1920x1080:60.00:normal:right:normal",

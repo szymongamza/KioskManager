@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KioskManager.Helpers.Validators;
+using System.ComponentModel.DataAnnotations;
 
 namespace KioskManager.Models
 {
@@ -12,33 +13,47 @@ namespace KioskManager.Models
         [Display(Name = "Status")]
         public bool isOnline { get; set; }
         [Display(Name = "Registered")]
+        [DataType(DataType.DateTime)]
         public DateTime Registered { get; set; }
         [Display(Name = "Last Online")]
+        [DataType(DataType.DateTime)]
         public DateTime? LastOnline { get; set; }
 
         //Settings:
         [Display(Name = "Host Name")]
         public string SettingHostName { get; set; } = string.Empty;
+
         [Display(Name = "Home Page")]
-        [DataType(DataType.Url)]
+        [UrlValidator(ErrorMessage = "Enter valid url")]
         public string SettingHomePage { get; set; } = string.Empty;
+
         [Display(Name = "Config Url")]
-        [DataType(DataType.Url)]
+        [UrlValidator(ErrorMessage = "Enter valid url")]
         public string SettingKioskConfig { get; set; } = string.Empty;
+
         [Display(Name = "Scheduled Actions")]
+        [DataType(DataType.MultilineText)]
         public string SettingScheduledAction { get; set; } = string.Empty;
+
         [Display(Name = "Refresh Page Time")]
         [DataType(DataType.Duration)]
         public TimeSpan SettingRefreshPage { get; set; }
+
         [Display(Name = "Root Password")]
         [DataType(DataType.Password)]
         public string SettingRootPassword { get; set; } = string.Empty;
+
         [Display(Name = "RTC Wake")]
+        [DataType(DataType.MultilineText)]
         public string SettingRtcWake { get; set; } = string.Empty;
+
         [Display(Name = "Screen Settings")]
+        [DataType(DataType.MultilineText)]
         public string SettingScreenSettings { get; set; } = string.Empty;
+
         [Display(Name = "Time Zone")]
         public string SettingTimeZone { get; set; } = string.Empty;
+
         public string GetSettings()
         {
             return $"connection=wired\r\n" +
@@ -52,7 +67,7 @@ namespace KioskManager.Models
                     $"disable_navigation_bar=yes\r\n" +
                     $"kiosk_config={this.SettingKioskConfig}\r\n" +
                     $"scheduled_action={this.SettingScheduledAction}\r\n" +
-                    $"refresh_webpage={this.SettingRefreshPage}\r\n" +
+                    $"refresh_webpage={this.SettingRefreshPage.TotalSeconds}\r\n" +
                     $"root_password={this.SettingRootPassword}\r\n" +
                     $"rtc_wake={this.SettingRtcWake}\r\n" +
                     $"screen_settings={this.SettingScreenSettings}\r\n" +

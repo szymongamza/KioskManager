@@ -77,7 +77,7 @@ namespace KioskManager.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Kiosk");
+                    b.ToTable("Kiosk", (string)null);
                 });
 #pragma warning restore 612, 618
         }

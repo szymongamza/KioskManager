@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KioskManager.Data;
 using KioskManager.Models;
 using System.Diagnostics;
+using System.Net.NetworkInformation;
 
 namespace KioskManager.Controllers
 {
@@ -43,30 +44,12 @@ namespace KioskManager.Controllers
             {
                 return NotFound();
             }
-
+            var p = new Ping();
+            var reply = p.Send("192.168.2.251");
+            Console.WriteLine("DEBUGGGGGGGGGGGGGGG");
+            Console.WriteLine(reply.RoundtripTime);
+            Console.WriteLine(reply.Status);
             return View(kioskObj);
-        }
-
-        // GET: Kiosk/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Kiosk/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PCId,ActualIPAddress,isOnline,Registered,LastOnline,SettingHostName,SettingHomePage,SettingKioskConfig,SettingScheduledAction,SettingRefreshPage,SettingRootPassword,SettingRtcWake,SettingScreenSettings,SettingTimeZone")] Kiosk kiosk)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(kiosk);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(kiosk);
         }
 
         // GET: Kiosk/Edit/5
@@ -94,14 +77,27 @@ namespace KioskManager.Controllers
         {
             if (id != kiosk.Id)
             {
+                return BadRequest();
+            }
+            var kioskObj = await _context.Kiosk.FirstOrDefaultAsync(x=> x.Id == id);
+            if(kioskObj is null)
+            {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(kiosk);
+                    kioskObj.SettingRefreshPage = kiosk.SettingRefreshPage;
+                    kioskObj.SettingHostName = kiosk.SettingHostName;
+                    kioskObj.SettingHomePage = kiosk.SettingHomePage;
+                    kioskObj.SettingKioskConfig = kiosk.SettingKioskConfig;
+                    kioskObj.SettingScheduledAction = kiosk.SettingScheduledAction;
+                    kioskObj.SettingRootPassword = kiosk.SettingRootPassword;
+                    kioskObj.SettingRtcWake = kiosk.SettingRtcWake;
+                    kioskObj.SettingScreenSettings = kiosk.SettingScreenSettings;
+                    kioskObj.SettingTimeZone = kiosk.SettingTimeZone;
+                    _context.Update(kioskObj);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -117,7 +113,7 @@ namespace KioskManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(kiosk);
+            return View(kioskObj);
         }
 
         // GET: Kiosk/Delete/5
