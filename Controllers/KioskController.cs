@@ -44,11 +44,6 @@ namespace KioskManager.Controllers
             {
                 return NotFound();
             }
-            var p = new Ping();
-            var reply = p.Send("192.168.2.251");
-            Console.WriteLine("DEBUGGGGGGGGGGGGGGG");
-            Console.WriteLine(reply.RoundtripTime);
-            Console.WriteLine(reply.Status);
             return View(kioskObj);
         }
 

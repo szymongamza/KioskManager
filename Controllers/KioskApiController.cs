@@ -69,7 +69,7 @@ namespace KioskManager.Controllers
                     PCId = kiosk,
                     ActualIPAddress = iPAddress.ToString(),
                     SettingHostName = "DefaultHostName",
-                    isOnline = false,
+                    isOnline = true,
                     Registered = DateTime.Now,
                     SettingHomePage = $"http://192.168.0.226:5000/Kiosk/Details/{kiosk}",
                     SettingKioskConfig = "http://192.168.0.226:5000/KioskApi/register",

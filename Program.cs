@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using KioskManager.Data;
 using Microsoft.AspNetCore.HttpLogging;
+using KioskManager.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<KioskManagerContext>(options => options
@@ -14,6 +15,8 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHostedService<ConnectionCheckBackgroundService>();
 
 builder.Services.AddHttpLogging(logging =>
 {

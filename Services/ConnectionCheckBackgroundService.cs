@@ -3,23 +3,49 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KioskManager.Services
 {
-    public class ConnectionCheckBackgroundService
+    public class ConnectionCheckBackgroundService : BackgroundService
     {
-        private readonly KioskManagerContext _context;
+        private readonly IServiceScopeFactory scopeFactory;
 
-        public ConnectionCheckBackgroundService(KioskManagerContext context)
+        public ConnectionCheckBackgroundService(IServiceScopeFactory scopeFactory)
         {
-            _context = context;
+            this.scopeFactory = scopeFactory;
         }
 
         public async void CheckConnectionOfAll()
         {
-            var kiosks = await _context.Kiosk.ToListAsync();
-            foreach(var k in kiosks)
+            using(var scope = scopeFactory.CreateScope())
             {
-                var reply = PingService.PingDevice(k.ActualIPAddress);
+                var _context = scope.ServiceProvider.GetRequiredService<KioskManagerContext>();
+                var kiosks = await _context.Kiosk.ToListAsync();
+                foreach (var k in kiosks)
+                {
+                    var reply = await PingService.PingDevice(k.ActualIPAddress);
+                    if (reply.Status == System.Net.NetworkInformation.IPStatus.Success)
+                    {
+                        k.isOnline = true;
+                    }
+                    else
+                    {
+                        k.isOnline = false;
+                    }
+                }
+                _context.UpdateRange(kiosks);
+                _context.SaveChanges();
             }
+           
 
+        }
+
+        protected override async Task ExecuteAsync(CancellationToken token)
+        {
+            await Task.Yield();
+
+            while (token.IsCancellationRequested == false)
+            {
+                await Task.Delay(30000, token);
+                CheckConnectionOfAll();
+            }
         }
     }
 }
