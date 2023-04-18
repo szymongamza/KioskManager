@@ -14,6 +14,10 @@ namespace KioskManager.Helpers.Validators
                 {
                     return ValidationResult.Success;
                 }
+                else if (Regex.IsMatch(x, @"^https:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$", RegexOptions.IgnoreCase))
+                {
+                    return ValidationResult.Success;
+                }
                 else
                 {
                     return new ValidationResult(ErrorMessage);
