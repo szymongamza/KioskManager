@@ -55,14 +55,8 @@ namespace KioskManager.Controllers
         [HttpGet("register")]
         public async Task<ActionResult<string>> Register([FromQuery] string kiosk)
         {
-            Console.WriteLine("######## FOUND ID: ###########");
-            Console.WriteLine(kiosk);
-            Console.WriteLine("#############################");
             var iPAddress = GetClientIpAddress(HttpContext);
             var hostIpAddress = HttpContext.Connection.LocalIpAddress.ToString();
-            Console.WriteLine("######## FOUND IP: ###########");
-            Console.WriteLine(iPAddress);
-            Console.WriteLine("#############################");
             var kioskObj = await _context.Kiosk.FirstOrDefaultAsync(x => x.PCId == kiosk);
             if (kioskObj is null)
             {
