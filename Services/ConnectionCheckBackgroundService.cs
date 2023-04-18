@@ -27,6 +27,10 @@ namespace KioskManager.Services
                     }
                     else
                     {
+                        if(k.isOnline == true)
+                        {
+                            k.LastOnline = DateTime.Now;
+                        }
                         k.isOnline = false;
                     }
                 }

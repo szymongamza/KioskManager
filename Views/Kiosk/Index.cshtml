@@ -47,13 +47,27 @@
                 @Html.DisplayFor(modelItem => item.ActualIPAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isOnline)
+                @if(item.isOnline == true){
+                        <button type="button" class="btn btn-success">Online</button>
+                }
+                else
+                {
+                        <button type="button" class="btn btn-danger">Offline</button>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Registered)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastOnline)
+                    @if(item.isOnline == false)
+                    {
+                        @Html.DisplayFor(modelItem => item.LastOnline)
+                        
+                    }
+                    else{
+                        <div>Now</div>
+                    }
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SettingHostName)
@@ -65,9 +79,9 @@
                 @Html.DisplayFor(modelItem => item.SettingRefreshPage)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PCId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><input type="button" value="Edit" class="btn btn-warning" /></a> 
+                    <a asp-action="Details" asp-route-id="@item.PCId"><input type="button" value="Details" class="btn btn-primary" /></a> 
+                    <a asp-action="Delete" asp-route-id="@item.Id"><input type="button" value="Delete" class="btn btn-danger" /></a>
             </td>
         </tr>
 }
