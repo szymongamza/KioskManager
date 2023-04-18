@@ -82,8 +82,10 @@ namespace KioskManager.Controllers
             }
             if (ModelState.IsValid)
             {
+                var actualPass = kioskObj.SettingRootPassword;
                 try
                 {
+
                     kioskObj.SettingRefreshPage = kiosk.SettingRefreshPage;
                     kioskObj.SettingHostName = kiosk.SettingHostName;
                     kioskObj.SettingHomePage = kiosk.SettingHomePage;
@@ -107,6 +109,8 @@ namespace KioskManager.Controllers
                         throw;
                     }
                 }
+
+                Restart(kiosk.ActualIPAddress, actualPass);
                 return RedirectToAction(nameof(Index));
             }
             return View(kioskObj);
@@ -149,18 +153,15 @@ namespace KioskManager.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost, ActionName("Restart")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Restart(int? id)
+        public void Restart(string ip, string pass)
         {
-            var kiosk = await _context.Kiosk.FirstOrDefaultAsync(x => x.Id == id);
-            using (var client = new SshClient(kiosk.ActualIPAddress, "root", kiosk.SettingRootPassword))
+            using (var client = new SshClient(ip, "root", pass))
             {
                 client.Connect();
                 client.RunCommand("reboot");
                 client.Disconnect();
             }
-            return RedirectToAction(nameof(Index));
+            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
