@@ -56,7 +56,6 @@ namespace KioskManager.Controllers
         public async Task<ActionResult<string>> Register([FromQuery] string kiosk)
         {
             var iPAddress = GetClientIpAddress(HttpContext);
-            var hostIpAddress = HttpContext.Connection.LocalIpAddress.ToString();
             var kioskObj = await _context.Kiosk.FirstOrDefaultAsync(x => x.PCId == kiosk);
             if (kioskObj is null)
             {
@@ -67,8 +66,8 @@ namespace KioskManager.Controllers
                     SettingHostName = "DefaultHostName",
                     isOnline = false,
                     Registered = DateTime.Now,
-                    SettingHomePage = $"http://{hostIpAddress}/Kiosk/Details/{kiosk}",
-                    SettingKioskConfig = $"http://{hostIpAddress}/KioskApi/register",
+                    SettingHomePage = $"http://192.168.0.226/Kiosk/Details/{kiosk}",
+                    SettingKioskConfig = $"http://192.168.0.226/KioskApi/register",
                     SettingScheduledAction = "Monday-22:00 Tuesday-22:00 Wednesday-22:00 Thursday-22:00 Friday-22:00 Saturday-22:00 action:halt",
                     SettingRefreshPage = TimeSpan.FromSeconds(10),
                     SettingRootPassword = "password",
