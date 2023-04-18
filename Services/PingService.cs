@@ -6,8 +6,17 @@ namespace KioskManager.Services
     { 
 
         public static async Task<PingReply> PingDevice(string iPAddress) {
-            var pinger = new Ping();
-            return pinger.Send(iPAddress);
+            try
+            {
+                var pinger = new Ping();
+                return pinger.Send(iPAddress);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+
         }
     }
 }

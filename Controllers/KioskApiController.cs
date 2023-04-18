@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KioskManager.Data;
 using KioskManager.Models;
 using System.Security.Cryptography.Xml;
+using System.Composition.Convention;
 
 namespace KioskManager.Controllers
 {
@@ -57,7 +58,8 @@ namespace KioskManager.Controllers
             Console.WriteLine("######## FOUND ID: ###########");
             Console.WriteLine(kiosk);
             Console.WriteLine("#############################");
-            var iPAddress = HttpContext.Connection.RemoteIpAddress;
+            var iPAddress = GetClientIpAddress(HttpContext);
+            var hostIpAddress = HttpContext.Connection.LocalIpAddress.ToString();
             Console.WriteLine("######## FOUND IP: ###########");
             Console.WriteLine(iPAddress);
             Console.WriteLine("#############################");
@@ -71,8 +73,8 @@ namespace KioskManager.Controllers
                     SettingHostName = "DefaultHostName",
                     isOnline = true,
                     Registered = DateTime.Now,
-                    SettingHomePage = $"http://192.168.0.226:5000/Kiosk/Details/{kiosk}",
-                    SettingKioskConfig = "http://192.168.0.226:5000/KioskApi/register",
+                    SettingHomePage = $"http://{hostIpAddress}/Kiosk/Details/{kiosk}",
+                    SettingKioskConfig = $"http://{hostIpAddress}/KioskApi/register",
                     SettingScheduledAction = "Monday-22:00 Tuesday-22:00 Wednesday-22:00 Thursday-22:00 Friday-22:00 Saturday-22:00 action:halt",
                     SettingRefreshPage = TimeSpan.FromSeconds(10),
                     SettingRootPassword = "password",
@@ -85,6 +87,7 @@ namespace KioskManager.Controllers
                 return kioskObj.GetSettings();
             }
             kioskObj.ActualIPAddress = iPAddress.ToString();
+            _context.Kiosk.Update(kioskObj);
             await _context.SaveChangesAsync();
             return kioskObj.GetSettings();
         }
@@ -158,6 +161,24 @@ namespace KioskManager.Controllers
         private bool KioskExists(int id)
         {
             return (_context.Kiosk?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        public string GetClientIpAddress(HttpContext context)
+        {
+            // Try to get the client IP address from the X-Real-IP header
+            var clientIp = context.Request.Headers["X-Real-IP"];
+
+            if (string.IsNullOrEmpty(clientIp))
+            {
+                clientIp = context.Request.Headers["X-Forwarded-For"];
+            }
+
+            // If the X-Real-IP header is not present, fall back to the RemoteIpAddress property
+            if (string.IsNullOrEmpty(clientIp))
+            {
+                clientIp = context.Connection.RemoteIpAddress.ToString();
+            }
+
+            return clientIp;
         }
     }
 }
