@@ -9,6 +9,7 @@ using KioskManager.Data;
 using KioskManager.Models;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
+using Renci.SshNet;
 
 namespace KioskManager.Controllers
 {
@@ -145,6 +146,20 @@ namespace KioskManager.Controllers
             }
             
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost, ActionName("Restart")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Restart(int? id)
+        {
+            var kiosk = await _context.Kiosk.FirstOrDefaultAsync(x => x.Id == id);
+            using (var client = new SshClient(kiosk.ActualIPAddress, "root", kiosk.SettingRootPassword))
+            {
+                client.Connect();
+                client.RunCommand("reboot");
+                client.Disconnect();
+            }
             return RedirectToAction(nameof(Index));
         }
 
