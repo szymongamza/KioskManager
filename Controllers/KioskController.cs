@@ -110,7 +110,7 @@ namespace KioskManager.Controllers
                     }
                 }
 
-                Restart(kiosk.ActualIPAddress, actualPass);
+                Restart(kioskObj.ActualIPAddress, actualPass);
                 return RedirectToAction(nameof(Index));
             }
             return View(kioskObj);
